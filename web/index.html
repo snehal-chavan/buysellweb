@@ -11,9 +11,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
         <link rel="stylesheet" href="newcssstyles.css">
- 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     </head>
-    <body ng-app="loginpage" ng-cloak>
+    <body ng-app="loginpage" ng-cloak >
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
@@ -21,7 +22,10 @@ and open the template in the editor.
         <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js"></script>
         <script type="text/javascript">
-            angular.module("loginpage",['ngMaterial','ngMessages']);
+            var app = angular.module("loginpage",['ngMaterial','ngMessages']);
+            app.controller("myctrl",['$scope',function($scope){
+               $scope.isChecked = "Remember me";  
+            }]);
         </script>
         <div layout="column" layout-fill>
   <md-toolbar>
@@ -31,10 +35,14 @@ and open the template in the editor.
 
       <!-- fill up the space between left and right area -->
       <span flex></span>
-      <md-button>
+      
           
-          Create Account
-      </md-button>
+      <md-button>
+          <md-icon md-font-set="material-icons"> code 
+          </md-icon>
+                  Source
+          </md-button>
+         
     </div>
 
   </md-toolbar>
@@ -45,13 +53,13 @@ and open the template in the editor.
               <md-card-header>
                   <center><h2>BuySell - Login</h2></center>
               </md-card-header>
-              <md-card-content>
+       <md-card-content>
                   
-        <form name="loginform" method="post" action="">
+        <form name="loginform" method="post" action="" ng-controller="myctrl">
             <div layout="column" layout-align="center center">
             <md-input-container>
                 <label>Email</label>
-                <input type="email" ng-model="email" required md-maxlength="30" minlength="11"/>
+                <input type="email" ng-model="email" required md-maxlength="50" minlength="11"/>
                 
                 <div ng-messages="loginform.email.$error" ng-show="loginform.email.$dirty">
                     <div ng-message="required">This is required!</div>
@@ -69,8 +77,8 @@ and open the template in the editor.
                 </div>
             </md-input-container>
             <md-input-container>
-            <md-checkbox ng-model="isChecked" aria-label="Remember Me">
-                Remember me
+            <md-checkbox ng-model="isChecked" ng-true-value="'Remembered!'" ng-false-value="'Remember me'" >
+                {{isChecked}}
             </md-checkbox>
             <a href="" style="font-size: 10px;">Forgot password</a>
             </md-input-container>
@@ -79,9 +87,10 @@ and open the template in the editor.
        </div>
         </form>
                   </md-card-content>
+               <md-card-actions layout="row" layout-align="end center">
+                <md-button>Create Account</md-button>
+                </md-card-actions>
               </md-card>
-        
-  </md-content>
 </div>
     </body>
 </html>
