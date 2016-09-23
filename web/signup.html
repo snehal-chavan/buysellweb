@@ -34,7 +34,7 @@ and open the template in the editor.
                 $scope.myDate.getFullYear(),
                 $scope.myDate.getMonth(),
                 $scope.myDate.getDate());
-                
+              
                 
                 $scope.states = ["Andaman and Nicobar Islands",
                                  "Andhra Pradesh",
@@ -71,7 +71,7 @@ and open the template in the editor.
                                  "Tripura",
                                  "Uttar Pradesh",
                                  "Uttarakhand",
-                                 "West Bengal"
+                                 "West Bengal",
                                     ];
             }]);
         </script>
@@ -94,7 +94,7 @@ and open the template in the editor.
                         <center><h2>BuySell - Signup</h2></center>
                     </md-card-header>
                     <md-card-content>
-                        <form name="signupform" method="post" action="" ng-controller="myctrl">
+                        <form name="signupform" method="post" action="" novalidate ng-controller="myctrl" ng-submit="">
                             <div layout="column" layout-align="center center">
                               Personal Information: {{fname+" "+lname}}
                                 <div layout="row" layout-xs="column" layout-align="space-between center">
@@ -211,7 +211,7 @@ and open the template in the editor.
                                           <md-input-container>
                                   <label>State</label>
                                      <md-select ng-model="state" placeholder="State">
-                                         <md-option ng-repeat="stater in states" ng-value="{{stater}}">{{stater}}</md-option>
+                                         <md-option ng-repeat="stater in states" ng-value="stater">{{stater}}</md-option>
                                             </md-select>
                                     <div ng-messages="signupform.state.$error" role="alert" multiple>
                                         <div ng-message="required" class="my-message">Supply State!</div>
@@ -220,14 +220,47 @@ and open the template in the editor.
                               </div>
                                   
                               </div>
-                              
+                              Account Information: {{fname+" "+lname}}
+                                <div layout="row" layout-xs="column" layout-align="space-between center">
+                                    <div flex>
+                                    <md-input-container>
+                                        <label>Password</label>
+                                        <input name="passwd" type="password" ng-model="passwd" required md-maxlength="30" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!#^%*?&])[A-Za-z\d$@$!#^%*?&]{8,30}"/> 
+                                        <div ng-messages="signupform.passwd.$error" role="alert" multiple>
+                                           <div ng-message="required">This is required!</div>
+                                            <div ng-message="md-maxlength">That's too long!</div>
+                                            <div ng-message="minlength">That's too short!</div>
+                                            <div ng-message="pattern">The password must contain <br> 1) Atleast 8 characters
+                                                <br> 2) Maximum 30 characters.
+                                                <br> 3) One Upper case alphabet.
+                                                <br> 4) One Lower case alphabet.
+                                                <br> 5) One special character.
+                                                <br> 6) One digit.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                    </div>
+                                    <div flex="5" hide-xs hide-sm>
+                                    </div>
+                                    <div flex="">
+                                    <md-input-container>
+                                           <label>Re-enter password</label>
+                                           <input name="repasswd" type="password" ng-model="repasswd" required md-maxlength="30" minlength="8">
+                                           <div ng-show=" signupform.passwd.$viewValue !== '' && (signupform.repasswd.$viewValue !== signupform.passwd.$viewValue)">
+                                        
+                                               <span class="match">Fields do not match!</span>
+                                               
+                                           </div>
+                                    </md-input-container>
+                                    </div>
+                                </div>
                                 
-                                <center><md-button class="md-primary md-raised"> login </md-button></center>
+                                <center><md-button class="md-primary md-raised" type="submit" ng-disabled="signupform.$invalid"> Signup </md-button></center>
                             </div>
                         </form>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
-                        <md-button href="signup.html">Create Account</md-button>
+                        <md-button href="/">Login</md-button>
                     </md-card-actions>
                 </md-card>
             </div>    
