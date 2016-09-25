@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>BuySell - Login</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <link rel="stylesheet" href="newcssstyles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    </head>
+    <body ng-app="loginpage" ng-cloak >
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js"></script>
+        <script type="text/javascript">
+            var app = angular.module("loginpage",['ngMaterial','ngMessages']);
+            app.controller("myctrl",['$scope',function($scope){
+               $scope.isChecked = "Remember me";  
+            }]);
+        </script>
+        <div layout="column" layout-fill>
+  <md-toolbar>
+
+    <div class="md-toolbar-tools">
+      <span>BuySell - The Online Marketplace</span>
+
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+      
+          
+      <md-button>
+          <md-icon md-font-set="material-icons"> code 
+          </md-icon>
+                  Source
+          </md-button>
+         
+    </div>
+
+  </md-toolbar>
+  <md-content>
+      
+      <div layout="column" layout-align="center center">
+          <md-card class="card">
+              <md-card-header>
+                  <center><h2>BuySell - Login</h2></center>
+              </md-card-header>
+       <md-card-content>
+                  
+        <form name="loginform" method="post" action="home.jsp" ng-controller="myctrl">
+            <div layout="column" layout-align="center center">
+            <md-input-container>
+                <label>Email or Phone No or UserName</label>
+                <input name="email" type="text" ng-model="text" required md-maxlength="50" minlength="1"/>
+                
+                <div ng-messages="loginform.email.$error" ng-show="loginform.email.$dirty">
+                    <div ng-message="required">This is required!</div>
+                    <div ng-message="md-maxlength">That's too long!</div>
+                    <div ng-message="minlength">That's too short!</div>
+                </div>
+            </md-input-container>
+             <md-input-container>
+                <label>Password</label>
+                <input name="passwd" type="password" ng-model="passwd" required md-maxlength="30" minlength="8">
+                <div ng-messages="loginform.passwd.$error" ng-show="loginform.passwd.$dirty">
+                <div ng-message="required">This is required!</div>
+                <div ng-message="md-maxlength">That's too long!</div>
+                <div ng-message="minlength">That's too short!</div>
+                </div>
+            </md-input-container>
+            <md-input-container>
+            <md-checkbox ng-model="isChecked" ng-true-value="'Remembered!'" ng-false-value="'Remember me'" >
+                {{isChecked}}
+            </md-checkbox>
+            <a href="" style="font-size: 10px;">Forgot password</a>
+            </md-input-container>
+            <center><md-button class="md-primary md-raised" type="submit"> login </md-button></center>
+            
+       </div>
+        </form>
+           <form name="singinp" method="post" action="signup.html" ng-controller="myctrl">
+                  </md-card-content>
+               <md-card-actions layout="row" layout-align="end center">
+                <md-button type="submit">Create Account</md-button>
+                </md-card-actions>
+              </md-card>
+</div>
+    </body>
+</html>
